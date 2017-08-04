@@ -17,6 +17,7 @@
 		6E996AA21F34106C0097BA4C /* NewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E996AA11F34106C0097BA4C /* NewViewController.swift */; };
 		6E996AA41F3412730097BA4C /* extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E996AA31F3412730097BA4C /* extension.swift */; };
 		6E996AA71F341DFE0097BA4C /* JournalModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6E996AA51F341DFE0097BA4C /* JournalModel.xcdatamodeld */; };
+		6EB1D2081F34723900377FDE /* NoneTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB1D2071F34723900377FDE /* NoneTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		6E996AA11F34106C0097BA4C /* NewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewViewController.swift; sourceTree = "<group>"; };
 		6E996AA31F3412730097BA4C /* extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = extension.swift; sourceTree = "<group>"; };
 		6E996AA61F341DFE0097BA4C /* JournalModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = JournalModel.xcdatamodel; sourceTree = "<group>"; };
+		6EB1D2071F34723900377FDE /* NoneTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoneTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +69,7 @@
 				6E996A9B1F3406A90097BA4C /* JournalTableViewCell.swift */,
 				6E996A851F34008B0097BA4C /* Main.storyboard */,
 				6E996A971F3404990097BA4C /* MainPageTableViewController.swift */,
+				6EB1D2071F34723900377FDE /* NoneTableViewCell.swift */,
 				6E996A9D1F3409470097BA4C /* ContentViewController.swift */,
 				6E996AA11F34106C0097BA4C /* NewViewController.swift */,
 				6E996AA31F3412730097BA4C /* extension.swift */,
@@ -175,6 +178,7 @@
 				6E996A981F3404990097BA4C /* MainPageTableViewController.swift in Sources */,
 				6E996AA21F34106C0097BA4C /* NewViewController.swift in Sources */,
 				6E996AA41F3412730097BA4C /* extension.swift in Sources */,
+				6EB1D2081F34723900377FDE /* NoneTableViewCell.swift in Sources */,
 				6E996A9C1F3406A90097BA4C /* JournalTableViewCell.swift in Sources */,
 				6E996A821F34008B0097BA4C /* AppDelegate.swift in Sources */,
 			);
@@ -342,6 +346,7 @@
 				6E996A921F34008C0097BA4C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

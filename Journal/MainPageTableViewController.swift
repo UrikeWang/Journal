@@ -11,8 +11,12 @@ import CoreData
 
 class MainPageTableViewController: UITableViewController {
 
-    @IBOutlet weak var addButton: UIBarButtonItem!
+//    @IBOutlet weak var addButton: UIBarButtonItem!
     @IBOutlet var journalsTableView: UITableView!
+
+    @IBOutlet weak var addButton: UIButton!
+
+    @IBOutlet weak var myTitle: UILabel!
 
     var journal: JournalMO!
     var journals = [JournalMO]()
@@ -23,18 +27,26 @@ class MainPageTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        addButton = UIBarButtonItem(image: UIImage(named: "icon_plus"), style: .plain, target: self, action:  "addNew:")
+        addButton.addTarget(self, action: #selector(addNew(sender:)), for: .touchUpInside)
+        addButton.setImage(UIImage(named: "icon_plus"), for: .normal)
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
+//        addButton = UIBarButtonItem(UIImage(named: "myImage.png"), style: .plain, target: self, action:  "addNew:")
+//        addButton = UIBarButtonItem(image: UIImage(named: "icon_plus.png"), style: .plain, target: self, action: "addNew:")
+//        addButton.image = UIImage(named: "myImage.png")
 
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+//        addButton.addTarget(self, action: "addNew", forControlEvents: UIControlEvents.TouchUpInside)
+//        addButton.setImage(UIImage.init(named: "icon_plus"), forState: UIControlState.Normal)
+
+//        self.tabBarController?.navigationItem.title = "My Journals"
+
     }
 
-    func addNew(sender: UIBarButtonItem) {
+    func addNew(sender: UIButton) {
 
-        performSegue(withIdentifier: "addNew", sender: self)
+//        performSegue(withIdentifier: "addNew", sender: self)
+
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "NewVC")
+        self.present(vc!, animated: true, completion: nil)
 
     }
 
@@ -45,10 +57,7 @@ class MainPageTableViewController: UITableViewController {
             let request: NSFetchRequest<JournalMO> = JournalMO.fetchRequest()
             journals = try context.fetch(request)
 
-//            print(journals)
             journalsTableView.reloadData()
-
-            //            for item in favoriteItems where item.productId == downloadProducts[]
 
         } catch {
             print("fetch failed！！")
@@ -80,8 +89,8 @@ class MainPageTableViewController: UITableViewController {
         //swiftlint:enable force_cast
 
         cell.journalTitle.text = journals[indexPath.row].journalTitle
+        cell.journalTitle.textColor = UIColor(red: 67.0/255.0, green: 87.0/255.0, blue: 97.0/255.0, alpha: 1.0)
 
-//        
         if let imageData = UIImage(data: (journals[indexPath.row].journalImage as? Data)!) {
             cell.journalImage.image = imageData
             cell.journalImage.layer.masksToBounds = true
@@ -102,66 +111,10 @@ class MainPageTableViewController: UITableViewController {
 
                 destinationTableViewController?.position = cell.journalImage.tag
 
-//                if let productName = cell.itemNameLabel.text {
-//                    
-//                    for product in downloadProducts where productName == product.name {
-//                        
-//                        destinationTableViewController?.productID = product.id
-//                        destinationTableViewController?.productPrice = product.price
-//                        destinationTableViewController?.productName = product.name
-//                        
-//                    }
-//                }
-
             }
 
         }
 
     }
 
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
-}
+ }

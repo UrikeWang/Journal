@@ -16,6 +16,7 @@ class NewViewController: UIViewController, UIImagePickerControllerDelegate, UINa
     @IBOutlet weak var journalDescription: UITextView!
     @IBOutlet weak var createButton: UIButton!
     @IBOutlet weak var separetLine: UIView!
+    @IBOutlet weak var cancelButton: UIButton!
 
     var journal: JournalMO!
     var journals = [JournalMO]()
@@ -26,7 +27,10 @@ class NewViewController: UIViewController, UIImagePickerControllerDelegate, UINa
 
     @IBAction func cancelButton(_ sender: UIButton) {
 
-        dismiss(animated: true)
+        self.presentingViewController?.dismiss(animated: false, completion: nil)
+
+//        let vc = self.storyboard?.instantiateViewController(withIdentifier: "MainVC")
+//        self.present(vc!, animated: true, completion: nil)
 
     }
 
@@ -42,7 +46,6 @@ class NewViewController: UIViewController, UIImagePickerControllerDelegate, UINa
             if let imageData = UIImagePNGRepresentation(img) {
 
                 journal.journalImage = imageData as NSData
-                appDelegate.saveContext()
 
                 do {
                     let task = try self.context.fetch(JournalMO.fetchRequest())
@@ -54,8 +57,10 @@ class NewViewController: UIViewController, UIImagePickerControllerDelegate, UINa
 
             }
 
-                let vc = self.storyboard?.instantiateViewController(withIdentifier: "MainVC")
-                self.present(vc!, animated: true, completion: nil)
+            appDelegate.saveContext()
+
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "MainVC")
+            self.present(vc!, animated: true, completion: nil)
 
         }
 
@@ -73,6 +78,19 @@ class NewViewController: UIViewController, UIImagePickerControllerDelegate, UINa
 
         //CreateButton
         createButton.setTitle("Create", for: .normal)
+        createButton.backgroundColor = UIColor(red: 237.0/255.0, green: 96.0/255.0, blue: 81.0/255.0, alpha: 1.0)
+        createButton.layer.cornerRadius = 22
+        createButton.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
+        createButton.layer.shadowRadius = 15.0
+        createButton.setTitleColor(UIColor.white, for: .normal)
+
+        //SeparateLine
+        separetLine.backgroundColor = UIColor(red: 171.0/255.0, green: 179.0/255.0, blue: 176.0/255.0, alpha: 1.0)
+
+        //TitleText
+
+        //CancelButton
+        cancelButton.setImage(UIImage(named: "button_close"), for: .normal)
 
     }
 
@@ -86,11 +104,7 @@ class NewViewController: UIViewController, UIImagePickerControllerDelegate, UINa
 
         picker.sourceType = UIImagePickerControllerSourceType.photoLibrary
 
-        //        picker.allowsEditing = true // 可對照片作編輯
-
-        //swiftlint:disable force_cast
         picker.delegate = self
-        //swiftlint:enable force_cast
 
         self.present(picker, animated: true, completion: nil)
 
@@ -120,15 +134,5 @@ class NewViewController: UIViewController, UIImagePickerControllerDelegate, UINa
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

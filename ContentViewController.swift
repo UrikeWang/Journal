@@ -34,33 +34,53 @@ class ContentViewController: UIViewController, UIImagePickerControllerDelegate, 
 
     @IBAction func modifyButton(_ sender: Any) {
 
-        //刪除core data的資料
         if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
 
             journal = JournalMO(context: appDelegate.persistentContainer.viewContext)
             journals[position].journalTitle = journalTitleText.text
             journals[position].journalDescription = journalDescriptionText.text
 
-//            context.delete(journals[position])
+//            let request: NSFetchRequest<JournalMO> = JournalMO.fetchRequest()
+//            do {
+//                
+//                journals = try context.fetch(request)
+//                
+//                if let imageData = UIImage(data: (journals[position].journalImage as? Data)!) {
+//                    imageSave = imageData
+//                    
+//                }
+//                
+//            } catch {
+//                print("沒抓到資料！！")
+//            }
+//
+//
             let img = imageSave
             if let imageData = UIImagePNGRepresentation(img) {
+                
+                print("5555555", imageData)
 
                 journals[position].journalImage = imageData as NSData
 
                 do {
                     let task = try self.context.fetch(JournalMO.fetchRequest())
                     journals = (task as? [JournalMO])!
-
+                    try appDelegate.saveContext()
+                    //
                 } catch let error {
                     print("Cannot save the journal image to core data!", error)
                 }
 
             }
+            
+            print("222222222",journals[position].journalImage)
+            print("33333333", position)
+            print("444444444444", journals[position].journalTitle)
+            
+            dismiss(animated: true)
 
-            appDelegate.saveContext()
-
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "MainVC")
-            self.present(vc!, animated: true, completion: nil)
+//            let vc = self.storyboard?.instantiateViewController(withIdentifier: "MainVC")
+//            self.present(vc!, animated: true, completion: nil)
 
         }
     }
@@ -109,6 +129,28 @@ class ContentViewController: UIViewController, UIImagePickerControllerDelegate, 
 
         //CancelButton
         cancelButton.setImage(UIImage(named: "button_close"), for: .normal)
+
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardNotification(notification:)), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    func keyboardNotification(notification: NSNotification) {
+        if let userInfo = notification.userInfo {
+
+            //swiftlint:disable force_cast
+            let keyboardFrame: CGRect = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+            let duration: Double = userInfo[UIKeyboardAnimationDurationUserInfoKey] as! Double
+            //swiftlint:enable force_cast
+
+            UIView.animate(withDuration: duration, animations: { () -> Void in
+                var frame = self.view.frame
+                frame.origin.y = keyboardFrame.minY - self.view.frame.height
+                self.view.frame = frame
+            })
+        }
     }
 
     func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
@@ -145,6 +187,20 @@ class ContentViewController: UIViewController, UIImagePickerControllerDelegate, 
 
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "Return" {
+
+//            if let cell = sender as? JournalTableViewCell {
+                let destinationTableViewController = segue.destination as? MainPageTableViewController
+
+                destinationTableViewController?.position = position
+
+//            }
+
+        }
+
     }
 
     override func didReceiveMemoryWarning() {

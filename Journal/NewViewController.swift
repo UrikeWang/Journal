@@ -92,6 +92,28 @@ class NewViewController: UIViewController, UIImagePickerControllerDelegate, UINa
         //CancelButton
         cancelButton.setImage(UIImage(named: "button_close"), for: .normal)
 
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardNotification(notification:)), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
+
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    func keyboardNotification(notification: NSNotification) {
+        if let userInfo = notification.userInfo {
+
+            //swiftlint:disable force_cast
+            let keyboardFrame: CGRect = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+            let duration: Double = userInfo[UIKeyboardAnimationDurationUserInfoKey] as! Double
+            //swiftlint:enable force_cast
+
+            UIView.animate(withDuration: duration, animations: { () -> Void in
+                var frame = self.view.frame
+                frame.origin.y = keyboardFrame.minY - self.view.frame.height
+                self.view.frame = frame
+            })
+        }
     }
 
     func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {

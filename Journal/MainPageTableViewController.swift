@@ -24,6 +24,8 @@ class MainPageTableViewController: UITableViewController {
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     //swiftlint:enable force_cast
 
+    var position = Int()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -33,8 +35,6 @@ class MainPageTableViewController: UITableViewController {
     }
 
     func addNew(sender: UIButton) {
-
-//        performSegue(withIdentifier: "addNew", sender: self)
 
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "NewVC")
         self.present(vc!, animated: true, completion: nil)
@@ -82,12 +82,31 @@ class MainPageTableViewController: UITableViewController {
         cell.journalTitle.text = journals[indexPath.row].journalTitle
         cell.journalTitle.textColor = UIColor(red: 67.0/255.0, green: 87.0/255.0, blue: 97.0/255.0, alpha: 1.0)
 
-        if let imageData = UIImage(data: (journals[indexPath.row].journalImage as? Data)!) {
-            cell.journalImage.image = imageData
-            cell.journalImage.layer.masksToBounds = true
-            cell.journalImage.contentMode = .scaleAspectFill
+        print("111111")
 
+        do {
+            if let imageData = UIImage(data: (journals[indexPath.row].journalImage as? Data)!) {
+
+                cell.journalImage.image = imageData
+                cell.journalImage.layer.masksToBounds = true
+                cell.journalImage.contentMode = .scaleAspectFill
+
+            }
+            } catch let error {
+            print("Cannot save the journal image to core data!", error)
         }
+
+//        if let imageData = try UIImage(data: (journals[indexPath.row].journalImage as? Data)!) {
+//            
+//            do {
+//                cell.journalImage.image = imageData
+//                cell.journalImage.layer.masksToBounds = true
+//                cell.journalImage.contentMode = .scaleAspectFill
+//            } catch let error {
+//                print("Cannot save the journal image to core data!", error)
+//            }
+//            
+//        }
 
         cell.journalImage.tag = indexPath.row
 

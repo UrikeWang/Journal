@@ -36,52 +36,39 @@ class ContentViewController: UIViewController, UIImagePickerControllerDelegate, 
 
         if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
 
-            journal = JournalMO(context: appDelegate.persistentContainer.viewContext)
-            journals[position].journalTitle = journalTitleText.text
-            journals[position].journalDescription = journalDescriptionText.text
+//            journal = JournalMO(context: appDelegate.persistentContainer.viewContext)
 
-//            let request: NSFetchRequest<JournalMO> = JournalMO.fetchRequest()
-//            do {
-//                
-//                journals = try context.fetch(request)
-//                
-//                if let imageData = UIImage(data: (journals[position].journalImage as? Data)!) {
-//                    imageSave = imageData
-//                    
-//                }
-//                
-//            } catch {
-//                print("沒抓到資料！！")
-//            }
-//
-//
-            let img = imageSave
-            if let imageData = UIImagePNGRepresentation(img) {
-                
-                print("5555555", imageData)
+            do {
 
-                journals[position].journalImage = imageData as NSData
+                let request: NSFetchRequest<JournalMO> = JournalMO.fetchRequest()
+                journals = try context.fetch(request)
 
-                do {
-                    let task = try self.context.fetch(JournalMO.fetchRequest())
-                    journals = (task as? [JournalMO])!
-                    try appDelegate.saveContext()
-                    //
-                } catch let error {
-                    print("Cannot save the journal image to core data!", error)
+                journals[position].journalTitle = journalTitleText.text
+                journals[position].journalDescription = journalDescriptionText.text
+
+                let img = imageSave
+                if let imageData = UIImagePNGRepresentation(img) {
+
+                    journals[position].journalImage = imageData as NSData
+
+                    do {
+                        let task = try self.context.fetch(JournalMO.fetchRequest())
+                        journals = (task as? [JournalMO])!
+
+                    } catch let error {
+                        print("Cannot save the journal image to core data!", error)
+                    }
+
                 }
 
+                appDelegate.saveContext()
+
+                //                journalsTableView.reloadData()
+
+            } catch {
+                print("fetch failed！！")
             }
-            
-            print("222222222",journals[position].journalImage)
-            print("33333333", position)
-            print("444444444444", journals[position].journalTitle)
-            
             dismiss(animated: true)
-
-//            let vc = self.storyboard?.instantiateViewController(withIdentifier: "MainVC")
-//            self.present(vc!, animated: true, completion: nil)
-
         }
     }
 

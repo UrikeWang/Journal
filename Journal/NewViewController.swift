@@ -71,6 +71,16 @@ class NewViewController: UIViewController, UIImagePickerControllerDelegate, UINa
 
         //ImageView
         journalImage.image = UIImage(named: "icon_photo")
+        journalImage.tintColor = UIColor.white
+
+//        let color1 = UIColor(red: 67.0/255.0, green: 87.0/255.0, blue: 97.0/255.0, alpha: 1.0)
+//        let color2 = UIColor(red: 26/255.0, green: 34/255.0, blue: 38/255.0, alpha: 1.0)
+//        let gradient = CAGradientLayer()
+//        gradient.frame = journalImage.bounds
+//        gradient.colors = [color1, color2]
+//        journalImage.layer.insertSublayer(gradient, at: 0)
+
+        journalImage.backgroundColor = UIColor(red: 67.0/255.0, green: 87.0/255.0, blue: 97.0/255.0, alpha: 1.0)
         journalImage.contentMode = .center
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
         journalImage.isUserInteractionEnabled = true
@@ -87,13 +97,17 @@ class NewViewController: UIViewController, UIImagePickerControllerDelegate, UINa
         //SeparateLine
         separetLine.backgroundColor = UIColor(red: 171.0/255.0, green: 179.0/255.0, blue: 176.0/255.0, alpha: 1.0)
 
-        //TitleText
-
         //CancelButton
         cancelButton.setImage(UIImage(named: "button_close"), for: .normal)
+        cancelButton.backgroundColor = UIColor.clear
+        cancelButton.tintColor = UIColor.white
 
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardNotification(notification:)), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
 
+    }
+
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
 
     deinit {

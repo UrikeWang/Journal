@@ -116,8 +116,14 @@ class ContentViewController: UIViewController, UIImagePickerControllerDelegate, 
 
         //CancelButton
         cancelButton.setImage(UIImage(named: "button_close"), for: .normal)
+        cancelButton.backgroundColor = UIColor.clear
+        cancelButton.tintColor = UIColor.white
 
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardNotification(notification:)), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
+    }
+
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
 
     deinit {

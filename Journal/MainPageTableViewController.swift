@@ -80,44 +80,31 @@ class MainPageTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        if journals.count > 0 {
+        //swiftlint:disable force_cast
+        let cell = tableView.dequeueReusableCell(withIdentifier: "JournalCell", for: indexPath) as! JournalTableViewCell
+        //swiftlint:enable force_cast
 
-            //swiftlint:disable force_cast
-            let cell = tableView.dequeueReusableCell(withIdentifier: "JournalCell", for: indexPath) as! JournalTableViewCell
-            //swiftlint:enable force_cast
+        cell.journalTitle.text = journals[indexPath.row].journalTitle
+        cell.journalTitle.textColor = UIColor(red: 67.0/255.0, green: 87.0/255.0, blue: 97.0/255.0, alpha: 1.0)
 
-            cell.journalTitle.text = journals[indexPath.row].journalTitle
-            cell.journalTitle.textColor = UIColor(red: 67.0/255.0, green: 87.0/255.0, blue: 97.0/255.0, alpha: 1.0)
+        do {
+            if let imageData = UIImage(data: (journals[indexPath.row].journalImage as? Data)!) {
 
-            do {
-                if let imageData = UIImage(data: (journals[indexPath.row].journalImage as? Data)!) {
+                cell.journalImage.image = imageData
+                cell.journalImage.layer.masksToBounds = true
+                cell.journalImage.contentMode = .scaleAspectFill
+                cell.journalImage.layer.cornerRadius = 8
+                cell.journalImage.layer.shadowColor = UIColor.greyish.cgColor
+                cell.journalImage.layer.shadowOffset = CGSize(width: 0, height: 0)
 
-                    cell.journalImage.image = imageData
-                    cell.journalImage.layer.masksToBounds = true
-                    cell.journalImage.contentMode = .scaleAspectFill
-                    cell.journalImage.layer.cornerRadius = 8
-                    cell.journalImage.layer.shadowColor = UIColor.greyish.cgColor
-                    cell.journalImage.layer.shadowOffset = CGSize(width: 0, height: 0)
-
-                }
-            } catch let error {
-                print("Cannot save the journal image to core data!", error)
             }
-
-            cell.journalImage.tag = indexPath.row
-
-            return cell
-
-        } else {
-
-            //swiftlint:disable force_cast
-            let cell = tableView.dequeueReusableCell(withIdentifier: "NoneCell", for: indexPath) as! NoneTableViewCell
-            //swiftlint:enable force_cast
-
-            cell.noneJournalLabel.text = "No more Journals!"
-
-            return cell
+        } catch let error {
+            print("Cannot save the journal image to core data!", error)
         }
+
+        cell.journalImage.tag = indexPath.row
+
+        return cell
 
     }
 
@@ -128,7 +115,6 @@ class MainPageTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
 
         if (editingStyle == UITableViewCellEditingStyle.delete) {
-            // handle delete (by removing the data from your array and updating the tableview)
 
             self.journals.remove(at: indexPath.row)
             if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
@@ -136,13 +122,12 @@ class MainPageTableViewController: UITableViewController {
                 context.delete(journals[indexPath.row])
 
                 appDelegate.saveContext()
-                print("刪掉物品！！！！！")
 
                 let request: NSFetchRequest<JournalMO> = JournalMO.fetchRequest()
                 do {
                     journals = try context.fetch(request)
                 } catch {
-                    print("空值！！！")
+                    print("error")
                 }
                 journalsTableView.reloadData()
 

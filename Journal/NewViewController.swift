@@ -133,7 +133,7 @@ class NewViewController: UIViewController, UIImagePickerControllerDelegate, UINa
     func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
 
         //swiftlint:disable force_cast
-        let tappedImage = tapGestureRecognizer.view as! UIImageView
+        _ = tapGestureRecognizer.view as! UIImageView
         //swiftlint:enable force_cast
 
         let picker: UIImagePickerController = UIImagePickerController()

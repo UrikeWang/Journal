@@ -30,15 +30,6 @@ class MainPageTableViewController: UITableViewController {
         addButton.addTarget(self, action: #selector(addNew(sender:)), for: .touchUpInside)
         addButton.setImage(UIImage(named: "icon_plus"), for: .normal)
 
-//        addButton = UIBarButtonItem(UIImage(named: "myImage.png"), style: .plain, target: self, action:  "addNew:")
-//        addButton = UIBarButtonItem(image: UIImage(named: "icon_plus.png"), style: .plain, target: self, action: "addNew:")
-//        addButton.image = UIImage(named: "myImage.png")
-
-//        addButton.addTarget(self, action: "addNew", forControlEvents: UIControlEvents.TouchUpInside)
-//        addButton.setImage(UIImage.init(named: "icon_plus"), forState: UIControlState.Normal)
-
-//        self.tabBarController?.navigationItem.title = "My Journals"
-
     }
 
     func addNew(sender: UIButton) {

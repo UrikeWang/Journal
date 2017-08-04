@@ -9,8 +9,8 @@
 import UIKit
 
 class JournalTableViewCell: UITableViewCell {
-    
-    
+    @IBOutlet weak var journalImage: UIImageView!
+    @IBOutlet weak var journalTitle: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()

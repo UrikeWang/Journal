@@ -14,7 +14,9 @@
 		6E996A981F3404990097BA4C /* MainPageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E996A971F3404990097BA4C /* MainPageTableViewController.swift */; };
 		6E996A9C1F3406A90097BA4C /* JournalTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E996A9B1F3406A90097BA4C /* JournalTableViewCell.swift */; };
 		6E996A9E1F3409470097BA4C /* ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E996A9D1F3409470097BA4C /* ContentViewController.swift */; };
-		6E996AA01F340DB60097BA4C /* TitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E996A9F1F340DB60097BA4C /* TitleTableViewCell.swift */; };
+		6E996AA21F34106C0097BA4C /* NewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E996AA11F34106C0097BA4C /* NewViewController.swift */; };
+		6E996AA41F3412730097BA4C /* extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E996AA31F3412730097BA4C /* extension.swift */; };
+		6E996AA71F341DFE0097BA4C /* JournalModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6E996AA51F341DFE0097BA4C /* JournalModel.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,7 +29,9 @@
 		6E996A971F3404990097BA4C /* MainPageTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainPageTableViewController.swift; sourceTree = "<group>"; };
 		6E996A9B1F3406A90097BA4C /* JournalTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JournalTableViewCell.swift; sourceTree = "<group>"; };
 		6E996A9D1F3409470097BA4C /* ContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContentViewController.swift; path = ../ContentViewController.swift; sourceTree = "<group>"; };
-		6E996A9F1F340DB60097BA4C /* TitleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleTableViewCell.swift; sourceTree = "<group>"; };
+		6E996AA11F34106C0097BA4C /* NewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewViewController.swift; sourceTree = "<group>"; };
+		6E996AA31F3412730097BA4C /* extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = extension.swift; sourceTree = "<group>"; };
+		6E996AA61F341DFE0097BA4C /* JournalModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = JournalModel.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,12 +64,14 @@
 		6E996A801F34008B0097BA4C /* Journal */ = {
 			isa = PBXGroup;
 			children = (
-				6E996A9F1F340DB60097BA4C /* TitleTableViewCell.swift */,
 				6E996A9B1F3406A90097BA4C /* JournalTableViewCell.swift */,
 				6E996A851F34008B0097BA4C /* Main.storyboard */,
 				6E996A971F3404990097BA4C /* MainPageTableViewController.swift */,
 				6E996A9D1F3409470097BA4C /* ContentViewController.swift */,
+				6E996AA11F34106C0097BA4C /* NewViewController.swift */,
+				6E996AA31F3412730097BA4C /* extension.swift */,
 				6E996A811F34008B0097BA4C /* AppDelegate.swift */,
+				6E996AA51F341DFE0097BA4C /* JournalModel.xcdatamodeld */,
 				6E996A881F34008C0097BA4C /* Assets.xcassets */,
 				6E996A8A1F34008C0097BA4C /* LaunchScreen.storyboard */,
 				6E996A8D1F34008C0097BA4C /* Info.plist */,
@@ -163,9 +169,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6E996AA01F340DB60097BA4C /* TitleTableViewCell.swift in Sources */,
+				6E996AA71F341DFE0097BA4C /* JournalModel.xcdatamodeld in Sources */,
 				6E996A9E1F3409470097BA4C /* ContentViewController.swift in Sources */,
 				6E996A981F3404990097BA4C /* MainPageTableViewController.swift in Sources */,
+				6E996AA21F34106C0097BA4C /* NewViewController.swift in Sources */,
+				6E996AA41F3412730097BA4C /* extension.swift in Sources */,
 				6E996A9C1F3406A90097BA4C /* JournalTableViewCell.swift in Sources */,
 				6E996A821F34008B0097BA4C /* AppDelegate.swift in Sources */,
 			);
@@ -333,6 +341,19 @@
 			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		6E996AA51F341DFE0097BA4C /* JournalModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				6E996AA61F341DFE0097BA4C /* JournalModel.xcdatamodel */,
+			);
+			currentVersion = 6E996AA61F341DFE0097BA4C /* JournalModel.xcdatamodel */;
+			path = JournalModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 6E996A761F34008B0097BA4C /* Project object */;
 }

@@ -9,14 +9,14 @@
 import UIKit
 
 class ContentViewController: UIViewController {
-    
+
     @IBOutlet weak var journalImage: UIImageView!
     @IBOutlet weak var journalTitleText: UITextField!
     @IBOutlet weak var journalDescriptionText: UITextView!
     @IBOutlet weak var separateLineImage: UIView!
     @IBOutlet weak var createButton: UIButton!
-    
-    
+    @IBAction func cancelButton(_ sender: Any) {
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +28,6 @@ class ContentViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
 
     /*
     // MARK: - Navigation

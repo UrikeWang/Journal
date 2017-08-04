@@ -10,14 +10,28 @@ import UIKit
 
 class MainPageTableViewController: UITableViewController {
 
+    @IBOutlet weak var addButton: UIBarButtonItem!
+
+    @IBAction func addButton(_ sender: Any) {
+
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        addButton = UIBarButtonItem(image: UIImage(named: "icon_plus"), style: .plain, target: self, action:  "addNew:")
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+    }
+
+    func addNew(sender: UIBarButtonItem) {
+
+        performSegue(withIdentifier: "addNew", sender: self)
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -34,12 +48,11 @@ class MainPageTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return 2
     }
 
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+
         //swiftlint:disable force_cast
         let cell = tableView.dequeueReusableCell(withIdentifier: "JournalCell", for: indexPath) as! JournalTableViewCell
         //swiftlint:enable force_cast
@@ -48,7 +61,29 @@ class MainPageTableViewController: UITableViewController {
 
         return cell
     }
-    
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "AddNew" {
+
+            if let cell = sender as? JournalTableViewCell {
+                let destinationTableViewController = segue.destination as? ContentViewController
+
+//                if let productName = cell.itemNameLabel.text {
+//                    
+//                    for product in downloadProducts where productName == product.name {
+//                        
+//                        destinationTableViewController?.productID = product.id
+//                        destinationTableViewController?.productPrice = product.price
+//                        destinationTableViewController?.productName = product.name
+//                        
+//                    }
+//                }
+
+            }
+
+        }
+
+    }
 
     /*
     // Override to support conditional editing of the table view.

@@ -20,7 +20,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="197" id="Nap-SM-pa1">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="JournalCell" rowHeight="197" id="Nap-SM-pa1" customClass="JournalTableViewCell" customModule="Journal" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="197"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Nap-SM-pa1" id="W6Y-J8-gVC">
@@ -50,7 +50,9 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="CjF-q6-x0H" kind="show" id="Hqz-pH-Xbm"/>
+                                    <outlet property="journalImage" destination="nNL-8o-bYH" id="jps-EO-h5i"/>
+                                    <outlet property="journalTitle" destination="H58-Fj-P5T" id="O9N-aT-aX0"/>
+                                    <segue destination="CjF-q6-x0H" kind="show" identifier="Show" id="Hqz-pH-Xbm"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -63,10 +65,13 @@
                     <navigationItem key="navigationItem" id="HYG-2A-xHq">
                         <barButtonItem key="rightBarButtonItem" title="Item" id="sFu-SX-vuT">
                             <connections>
-                                <segue destination="Qvo-N4-gel" kind="show" id="oP2-gd-eoe"/>
+                                <segue destination="Qvo-N4-gel" kind="show" identifier="addNew" id="t92-RJ-wdF"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="addButton" destination="sFu-SX-vuT" id="LNJ-4e-xmg"/>
+                    </connections>
                 </tableViewController>
             </objects>
             <point key="canvasLocation" x="1456.8" y="148.87556221889056"/>
@@ -122,6 +127,18 @@
                                 </constraints>
                                 <state key="normal" title="Button"/>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oac-Qk-oyh">
+                                <rect key="frame" x="20" y="29" width="36" height="36"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="36" id="sSc-Mx-WAs"/>
+                                    <constraint firstAttribute="height" constant="36" id="xaj-Bq-FY6"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="cancelButton:" destination="CjF-q6-x0H" eventType="touchUpInside" id="qMo-GB-EHk"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -131,6 +148,7 @@
                             <constraint firstItem="74R-lB-8G7" firstAttribute="top" secondItem="FQ2-7U-WYH" secondAttribute="bottom" constant="8" id="Ky8-YB-uXf"/>
                             <constraint firstItem="7PC-n3-BU6" firstAttribute="trailing" secondItem="4EF-ud-y4c" secondAttribute="trailing" id="L5b-NO-SWC"/>
                             <constraint firstItem="7PC-n3-BU6" firstAttribute="top" secondItem="4EF-ud-y4c" secondAttribute="bottom" constant="9.8000000000000007" id="Mew-24-EsV"/>
+                            <constraint firstItem="Oac-Qk-oyh" firstAttribute="leading" secondItem="dBJ-Rr-ZD3" secondAttribute="leading" constant="20" id="Ric-hf-UmJ"/>
                             <constraint firstItem="4EF-ud-y4c" firstAttribute="top" secondItem="Ymp-QY-1G1" secondAttribute="bottom" constant="10" id="Usm-gZ-bEK"/>
                             <constraint firstItem="FQ2-7U-WYH" firstAttribute="top" secondItem="7PC-n3-BU6" secondAttribute="bottom" constant="12" id="e13-8q-gGL"/>
                             <constraint firstItem="b3O-fe-P6E" firstAttribute="leading" secondItem="dBJ-Rr-ZD3" secondAttribute="leading" id="ehI-XO-TfL"/>
@@ -138,6 +156,7 @@
                             <constraint firstItem="FQ2-7U-WYH" firstAttribute="centerX" secondItem="dBJ-Rr-ZD3" secondAttribute="centerX" id="mZg-mL-ADU"/>
                             <constraint firstAttribute="trailingMargin" secondItem="4EF-ud-y4c" secondAttribute="trailing" constant="22" id="swx-Yw-JU6"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Ymp-QY-1G1" secondAttribute="trailing" constant="22" id="vdW-21-byb"/>
+                            <constraint firstItem="Oac-Qk-oyh" firstAttribute="top" secondItem="dBJ-Rr-ZD3" secondAttribute="top" constant="29" id="wIs-fK-exn"/>
                             <constraint firstItem="b3O-fe-P6E" firstAttribute="top" secondItem="dBJ-Rr-ZD3" secondAttribute="top" id="wff-Jf-ld1"/>
                             <constraint firstAttribute="trailing" secondItem="b3O-fe-P6E" secondAttribute="trailing" id="xwh-2E-sdI"/>
                         </constraints>
@@ -173,10 +192,10 @@
             </objects>
             <point key="canvasLocation" x="517.60000000000002" y="148.87556221889056"/>
         </scene>
-        <!--Content View Controller-->
+        <!--New View Controller-->
         <scene sceneID="p5v-ya-i6W">
             <objects>
-                <viewController id="Qvo-N4-gel" customClass="ContentViewController" customModule="Journal" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Qvo-N4-gel" customClass="NewViewController" customModule="Journal" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="TXY-Ju-W28"/>
                         <viewControllerLayoutGuide type="bottom" id="crz-Lo-Ken"/>
@@ -223,6 +242,21 @@
                                     <constraint firstAttribute="width" constant="160" id="abF-1G-Zai"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="createButton:" destination="Qvo-N4-gel" eventType="touchUpInside" id="9mB-sh-cat"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xjf-be-lOA">
+                                <rect key="frame" x="20" y="29" width="36" height="36"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="36" id="ODk-UI-gKe"/>
+                                    <constraint firstAttribute="height" constant="36" id="icJ-dp-2Bg"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="cancelButton:" destination="Qvo-N4-gel" eventType="touchUpOutside" id="cj3-ve-jSr"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -233,12 +267,14 @@
                             <constraint firstItem="IOf-6R-hhm" firstAttribute="leading" secondItem="X2S-dK-ej4" secondAttribute="leadingMargin" constant="22" id="45x-Aj-yY4"/>
                             <constraint firstItem="wuV-1K-lh1" firstAttribute="leading" secondItem="X2S-dK-ej4" secondAttribute="leadingMargin" constant="22" id="7hm-Jz-IJV"/>
                             <constraint firstItem="ePo-Js-6qC" firstAttribute="top" secondItem="Mln-sF-xhy" secondAttribute="bottom" constant="12" id="7nB-pt-xuV"/>
+                            <constraint firstItem="Xjf-be-lOA" firstAttribute="leading" secondItem="X2S-dK-ej4" secondAttribute="leading" constant="20" id="8jN-LE-U19"/>
                             <constraint firstItem="IOf-6R-hhm" firstAttribute="top" secondItem="wuV-1K-lh1" secondAttribute="bottom" constant="10" id="LhD-bu-W7w"/>
                             <constraint firstAttribute="trailingMargin" secondItem="wuV-1K-lh1" secondAttribute="trailing" constant="22" id="OgE-Qi-TuA"/>
                             <constraint firstItem="2ql-nV-DoN" firstAttribute="leading" secondItem="X2S-dK-ej4" secondAttribute="leading" id="VEv-ch-9M6"/>
                             <constraint firstItem="wuV-1K-lh1" firstAttribute="top" secondItem="2ql-nV-DoN" secondAttribute="bottom" constant="10" id="Way-G0-74c"/>
                             <constraint firstAttribute="trailing" secondItem="2ql-nV-DoN" secondAttribute="trailing" id="Zao-Tc-LA6"/>
                             <constraint firstItem="Mln-sF-xhy" firstAttribute="trailing" secondItem="IOf-6R-hhm" secondAttribute="trailing" id="cC7-kH-v8T"/>
+                            <constraint firstItem="Xjf-be-lOA" firstAttribute="top" secondItem="X2S-dK-ej4" secondAttribute="top" constant="29" id="eGk-1X-dLK"/>
                             <constraint firstItem="crz-Lo-Ken" firstAttribute="top" secondItem="ePo-Js-6qC" secondAttribute="bottom" constant="8" id="mzw-cp-gD8"/>
                             <constraint firstItem="ePo-Js-6qC" firstAttribute="centerX" secondItem="X2S-dK-ej4" secondAttribute="centerX" id="uk6-mx-aob"/>
                             <constraint firstAttribute="trailingMargin" secondItem="IOf-6R-hhm" secondAttribute="trailing" constant="22" id="ylD-Xu-HKR"/>
@@ -246,11 +282,11 @@
                     </view>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
-                        <outlet property="createButton" destination="ePo-Js-6qC" id="Khg-O7-Pfx"/>
-                        <outlet property="journalDescriptionText" destination="Mln-sF-xhy" id="kEN-BV-jXC"/>
-                        <outlet property="journalImage" destination="2ql-nV-DoN" id="0Os-DW-HgL"/>
-                        <outlet property="journalTitleText" destination="wuV-1K-lh1" id="Yky-FH-Lyf"/>
-                        <outlet property="separateLineImage" destination="IOf-6R-hhm" id="JC7-bK-qRi"/>
+                        <outlet property="createButton" destination="ePo-Js-6qC" id="cYM-RE-0H2"/>
+                        <outlet property="journalDescription" destination="Mln-sF-xhy" id="m5I-Ie-efM"/>
+                        <outlet property="journalImage" destination="2ql-nV-DoN" id="gd3-PT-LT7"/>
+                        <outlet property="journalTitle" destination="wuV-1K-lh1" id="YDz-X1-8eg"/>
+                        <outlet property="separetLine" destination="IOf-6R-hhm" id="JiR-Mb-tMk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kdi-gd-xUK" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -19,6 +19,10 @@ class NewViewController: UIViewController, UIImagePickerControllerDelegate, UINa
 
     var journal: JournalMO!
     var journals = [JournalMO]()
+    //swiftlint:disable force_cast
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    //swiftlint:enable force_cast
+    var imageSave = UIImage()
 
     @IBAction func cancelButton(_ sender: UIButton) {
 
@@ -27,6 +31,33 @@ class NewViewController: UIViewController, UIImagePickerControllerDelegate, UINa
     }
 
     @IBAction func createButton(_ sender: Any) {
+
+        if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+
+            journal = JournalMO(context: appDelegate.persistentContainer.viewContext)
+            journal.journalTitle = journalTitle.text
+            journal.journalDescription = journalDescription.text
+
+            let img = imageSave
+            if let imageData = UIImagePNGRepresentation(img) {
+
+                journal.journalImage = imageData as NSData
+                appDelegate.saveContext()
+
+                do {
+                    let task = try self.context.fetch(JournalMO.fetchRequest())
+                    journals = (task as? [JournalMO])!
+
+                } catch let error {
+                    print("Cannot save the journal image to core data!", error)
+                }
+
+            }
+
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: "MainVC")
+                self.present(vc!, animated: true, completion: nil)
+
+        }
 
     }
 
@@ -72,6 +103,8 @@ class NewViewController: UIViewController, UIImagePickerControllerDelegate, UINa
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             journalImage.image = image
             journalImage.contentMode = .scaleAspectFit
+
+            imageSave = image
 
         } else {
             print("Something went wrong")

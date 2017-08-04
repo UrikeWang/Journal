@@ -14,25 +14,25 @@
         <scene sceneID="6Pe-ob-BJa">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gXm-Bc-jsZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tableViewController id="gEJ-I0-N0Z" customClass="MainPageTableViewController" customModule="Journal" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="197" sectionHeaderHeight="28" sectionFooterHeight="28" id="Xm9-Fk-BcW">
+                <tableViewController storyboardIdentifier="MainVC" id="gEJ-I0-N0Z" customClass="MainPageTableViewController" customModule="Journal" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="239" sectionHeaderHeight="28" sectionFooterHeight="28" id="Xm9-Fk-BcW">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="JournalCell" rowHeight="197" id="Nap-SM-pa1" customClass="JournalTableViewCell" customModule="Journal" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="375" height="197"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="JournalCell" rowHeight="239" id="Nap-SM-pa1" customClass="JournalTableViewCell" customModule="Journal" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="239"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Nap-SM-pa1" id="W6Y-J8-gVC">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="196.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="239"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nNL-8o-bYH">
-                                            <rect key="frame" x="28" y="18" width="319" height="113.5"/>
+                                            <rect key="frame" x="28" y="18" width="319" height="156"/>
                                             <color key="backgroundColor" red="0.50196081400000003" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H58-Fj-P5T">
-                                            <rect key="frame" x="38" y="147.5" width="299" height="21"/>
+                                            <rect key="frame" x="38" y="190" width="299" height="21"/>
                                             <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -41,11 +41,11 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="nNL-8o-bYH" firstAttribute="leading" secondItem="W6Y-J8-gVC" secondAttribute="leadingMargin" constant="20" id="2Rq-7E-Afu"/>
-                                        <constraint firstItem="H58-Fj-P5T" firstAttribute="top" secondItem="nNL-8o-bYH" secondAttribute="bottom" constant="16" id="AJK-sS-ie0"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="H58-Fj-P5T" secondAttribute="trailing" constant="30" id="FQA-GF-zbu"/>
                                         <constraint firstItem="H58-Fj-P5T" firstAttribute="leading" secondItem="W6Y-J8-gVC" secondAttribute="leadingMargin" constant="30" id="IGH-GQ-Yc4"/>
                                         <constraint firstItem="nNL-8o-bYH" firstAttribute="top" secondItem="W6Y-J8-gVC" secondAttribute="topMargin" constant="10" id="eVx-uE-O4N"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="nNL-8o-bYH" secondAttribute="trailing" constant="20" id="nHq-7q-TQt"/>
+                                        <constraint firstItem="H58-Fj-P5T" firstAttribute="top" secondItem="nNL-8o-bYH" secondAttribute="bottom" constant="16" id="tOc-m2-Ggq"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="H58-Fj-P5T" secondAttribute="bottom" constant="19.800000000000001" id="uba-oL-8ZW"/>
                                     </constraints>
                                 </tableViewCellContentView>
@@ -71,6 +71,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="addButton" destination="sFu-SX-vuT" id="LNJ-4e-xmg"/>
+                        <outlet property="journalsTableView" destination="Xm9-Fk-BcW" id="xhB-za-XTw"/>
                     </connections>
                 </tableViewController>
             </objects>
@@ -107,7 +108,6 @@
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="7PC-n3-BU6">
                                 <rect key="frame" x="38" y="442" width="299" height="161"/>
                                 <color key="backgroundColor" red="0.0" green="0.25098040700000002" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
@@ -222,8 +222,7 @@
                             </textField>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Mln-sF-xhy">
                                 <rect key="frame" x="38" y="442" width="299" height="161"/>
-                                <color key="backgroundColor" red="0.0" green="0.25098040700000002" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>

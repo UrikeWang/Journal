@@ -7,14 +7,18 @@
 //
 
 import UIKit
+import CoreData
 
 class MainPageTableViewController: UITableViewController {
 
     @IBOutlet weak var addButton: UIBarButtonItem!
+    @IBOutlet var journalsTableView: UITableView!
 
-    @IBAction func addButton(_ sender: Any) {
-
-    }
+    var journal: JournalMO!
+    var journals = [JournalMO]()
+    //swiftlint:disable force_cast
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    //swiftlint:enable force_cast
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +38,24 @@ class MainPageTableViewController: UITableViewController {
 
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated) // No need for semicolon
+        do {
+
+            let request: NSFetchRequest<JournalMO> = JournalMO.fetchRequest()
+            journals = try context.fetch(request)
+
+//            print(journals)
+            journalsTableView.reloadData()
+
+            //            for item in favoriteItems where item.productId == downloadProducts[]
+
+        } catch {
+            print("fetch failed！！")
+        }
+
+    }
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -48,7 +70,7 @@ class MainPageTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 2
+        return journals.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -57,16 +79,28 @@ class MainPageTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "JournalCell", for: indexPath) as! JournalTableViewCell
         //swiftlint:enable force_cast
 
-        // Configure the cell...
+        cell.journalTitle.text = journals[indexPath.row].journalTitle
+
+//        
+        if let imageData = UIImage(data: (journals[indexPath.row].journalImage as? Data)!) {
+            cell.journalImage.image = imageData
+            cell.journalImage.layer.masksToBounds = true
+            cell.journalImage.contentMode = .scaleAspectFill
+
+        }
+
+        cell.journalImage.tag = indexPath.row
 
         return cell
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "AddNew" {
+        if segue.identifier == "Show" {
 
             if let cell = sender as? JournalTableViewCell {
                 let destinationTableViewController = segue.destination as? ContentViewController
+
+                destinationTableViewController?.position = cell.journalImage.tag
 
 //                if let productName = cell.itemNameLabel.text {
 //                    
